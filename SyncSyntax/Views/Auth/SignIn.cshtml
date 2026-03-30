@@ -1,0 +1,82 @@
+﻿@model SignInViewModel
+
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<div class="signin-page d-flex align-items-center justify-content-center">
+
+    <div class="card signin-card shadow border-0 p-3">
+
+        <!-- Heading -->
+        <div class="text-center mb-3">
+            <h4 class="fw-bold text-primary mb-1">Welcome Back 👋</h4>
+            <p class="text-muted small">Login to your account</p>
+        </div>
+
+        <!-- Form -->
+        <form asp-action="SignIn" method="post">
+
+            <!-- Validation -->
+            <div asp-validation-summary="All" class="text-danger small mb-2 text-center"></div>
+
+            <!-- Email -->
+            <div class="mb-2 position-relative">
+                <label asp-for="Email" class="form-label small fw-semibold"></label>
+                <i class="bi bi-envelope input-icon"></i>
+                <input asp-for="Email" class="form-control input-style ps-5" placeholder="Enter your email" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-2 position-relative">
+                <label asp-for="Password" class="form-label small fw-semibold"></label>
+
+                <!-- Left Lock Icon -->
+                <i class="bi bi-lock input-icon"></i>
+
+                <!-- Password Input -->
+                <input asp-for="Password" id="passwordInput" type="password"
+                       class="form-control input-style ps-5 pe-5"
+                       placeholder="Enter password" />
+
+                <!-- Eye Toggle -->
+                <i class="bi bi-eye toggle-password" id="togglePassword"></i>
+
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-primary rounded-pill btn-animate">
+                    Sign In
+                </button>
+
+                <a asp-action="Index" asp-controller="Post" class="btn btn-outline-secondary rounded-pill btn-animate">
+                    Back
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const toggle = document.getElementById("togglePassword");
+        const password = document.getElementById("passwordInput");
+
+        toggle.addEventListener("click", function () {
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            // change icon
+            this.classList.toggle("bi-eye");
+            this.classList.toggle("bi-eye-slash");
+        });
+    </script>
+}

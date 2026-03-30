@@ -1,0 +1,141 @@
+﻿@model Post
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container my-5">
+
+    <!-- Post Content -->
+    <div class="card shadow-sm p-4">
+        <h1>@Model.Title</h1>
+
+        <p>
+            <span class="badge bg-primary">By: @Model.Author</span>
+            <span class="badge bg-primary">
+                @Model.PublishedDate.ToString("MMMM dd, yyyy")
+            </span>
+        </p>
+
+        <p>
+            <span class="badge bg-secondary">
+                Category: @Model.Category?.Name
+            </span>
+        </p>
+
+        @if (!string.IsNullOrEmpty(Model.FeatureImagePath))
+        {
+            <img src="@Model.FeatureImagePath" class="img-fluid rounded mb-3" style="height:400px; object-fit:cover;" />
+        }
+
+        <div>
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+
+    <!-- COMMENTS -->
+    <h3 class="mt-5">Comments</h3>
+
+    <div class="comments-section">
+        @if (Model.Comments?.Any() ?? false)
+        {
+            foreach (var comment in Model.Comments)
+            {
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5>@comment.UserName</h5>
+                        <small class="text-muted">
+                            @comment.CommentDate.ToString("MMMM dd, yyyy")
+                        </small>
+                        <p>@comment.Content</p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    @if (!(Model.Comments?.Any() ?? false))
+    {
+        <p id="noCommentsText" class="text-muted fst-italic">
+            No comments yet. Be the first to comment!
+        </p>
+    }
+
+    <!-- ADD COMMENT -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="card mt-4 p-3 shadow-sm">
+            <h4>Add Comment</h4>
+
+            <form id="commentForm">
+                <input type="hidden" id="PostId" value="@Model.Id" />
+
+                <div class="mb-2">
+                    <label>Comment</label>
+                    <textarea id="Content" class="form-control" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2">
+                    Submit Comment
+                </button>
+            </form>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#commentForm').submit(function (event) {
+                event.preventDefault();
+
+                var content = $('#Content').val();
+                var postId = $('#PostId').val();
+
+                if (!content.trim()) {
+                    alert("Comment cannot be empty ❌");
+                    return;
+                }
+
+                $.ajax({
+                    url: '/Post/AddComment',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        Content: content,
+                        PostId: postId
+                    }),
+                    success: function (response) {
+
+                        if (!response.success) {
+                            alert(response.message);
+                            return;
+                        }
+
+                        $('#commentForm')[0].reset();
+                        $('#noCommentsText').remove();
+
+                        $('.comments-section').append(`
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-body">
+                                    <h5>${response.userName}</h5>
+                                    <small class="text-muted">${response.commentDate}</small>
+                                    <p>${response.content}</p>
+                                </div>
+                            </div>
+                        `);
+                    },
+                    error: function () {
+                        alert("Error adding comment ❌");
+                    }
+                });
+
+            });
+
+        });
+    </script>
+}

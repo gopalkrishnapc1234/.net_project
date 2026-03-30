@@ -1,0 +1,103 @@
+﻿@model SignUpViewModel
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+
+<div class="signup-page d-flex align-items-center justify-content-center">
+
+    <div class="card signup-card shadow border-0 p-3">
+
+        <!-- Heading -->
+        <div class="text-center mb-3">
+            <h4 class="fw-bold text-primary mb-1">Create Account</h4>
+            <p class="text-muted small">Join SyncSyntax today 🚀</p>
+        </div>
+
+        <!-- Form -->
+        <form asp-action="SignUp" method="post">
+
+            <div asp-validation-summary="All" class="text-danger small mb-2 text-center"></div>
+
+            <!-- Email -->
+            <div class="mb-2 position-relative">
+                <label asp-for="Email" class="form-label small fw-semibold"></label>
+                <i class="bi bi-envelope input-icon"></i>
+                <input asp-for="Email" class="form-control input-style ps-5" placeholder="Enter your email" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-2 position-relative">
+                <label asp-for="Password" class="form-label small fw-semibold"></label>
+
+                <i class="bi bi-lock input-icon"></i>
+
+                <input asp-for="Password" id="passwordInput" type="password"
+                       class="form-control input-style ps-5 pe-5"
+                       placeholder="Enter password" />
+
+                <i class="bi bi-eye toggle-password" id="togglePassword"></i>
+
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-2 position-relative">
+                <label asp-for="ConfirmPassword" class="form-label small fw-semibold"></label>
+
+                <i class="bi bi-lock input-icon"></i>
+
+                <input asp-for="ConfirmPassword" id="confirmPasswordInput" type="password"
+                       class="form-control input-style ps-5 pe-5"
+                       placeholder="Confirm password" />
+
+                <i class="bi bi-eye toggle-password" id="toggleConfirmPassword"></i>
+
+                <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-primary rounded-pill btn-animate">
+                    Sign Up
+                </button>
+
+                <a asp-action="Index" asp-controller="Post" class="btn btn-outline-secondary rounded-pill btn-animate">
+                    Back
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Password toggle
+        const togglePassword = document.getElementById("togglePassword");
+        const password = document.getElementById("passwordInput");
+
+        togglePassword.addEventListener("click", function () {
+            const type = password.type === "password" ? "text" : "password";
+            password.type = type;
+            this.classList.toggle("bi-eye");
+            this.classList.toggle("bi-eye-slash");
+        });
+
+        // Confirm Password toggle
+        const toggleConfirm = document.getElementById("toggleConfirmPassword");
+        const confirmPassword = document.getElementById("confirmPasswordInput");
+
+        toggleConfirm.addEventListener("click", function () {
+            const type = confirmPassword.type === "password" ? "text" : "password";
+            confirmPassword.type = type;
+            this.classList.toggle("bi-eye");
+            this.classList.toggle("bi-eye-slash");
+        });
+    </script>
+}

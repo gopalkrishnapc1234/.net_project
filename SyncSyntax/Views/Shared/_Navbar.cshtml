@@ -1,0 +1,64 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm py-3">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-4" asp-controller="Post" asp-action="Index">
+            <strong>L.W.M</strong>
+        </a>
+
+        <!-- Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Content -->
+        <div class="collapse navbar-collapse" id="navbarMain">
+
+            <!-- Left -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a asp-controller="Post" asp-action="Index" class="nav-link nav-hover">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="About" class="nav-link nav-hover">About</a>
+                </li>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Category" asp-action="Index" class="nav-link nav-hover">
+                            Category
+                        </a>
+                    </li>
+                }
+            </ul>
+
+            <!-- Right Buttons -->
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="ms-auto me-3">
+                    <a asp-controller="Auth" asp-action="SignOut"
+                       class="btn btn-danger px-4 rounded-pill fw-semibold shadow-sm btn-animate">
+                        SignOut
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex ms-auto gap-2 me-3">
+                    <a asp-controller="Auth" asp-action="SignIn"
+                       class="btn btn-success px-4 rounded-pill fw-semibold shadow-sm btn-animate">
+                        Login
+                    </a>
+
+                    <a asp-controller="Auth" asp-action="SignUp"
+                       class="btn btn-outline-light px-4 rounded-pill fw-semibold btn-animate">
+                        Register
+                    </a>
+                </div>
+            }
+
+        </div>
+    </div>
+</nav>

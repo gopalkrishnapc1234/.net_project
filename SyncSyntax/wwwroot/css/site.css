@@ -1,0 +1,225 @@
+﻿/* ================= GLOBAL SETTINGS ================= */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/* ✅ Background + Text Fix */
+body {
+    margin-bottom: 60px;
+    background-color: gray !important; /* Light Gray */
+    color: #212529 !important; /* Dark Text */
+}
+
+/* ================= FORM & INPUT ================= */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
+.form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    padding:5px !important;
+    height:50px; !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Premium look */
+}
+
+/* Nav link hover */
+.nav-hover {
+    transition: all 0.3s ease;
+}
+
+    .nav-hover:hover {
+        color: #fff !important;
+        transform: translateY(-2px);
+    }
+
+/* Navbar text size */
+.navbar .nav-link {
+    font-size: 14px;
+    padding: 6px 10px;
+}
+
+/* Brand size */
+.navbar-brand {
+    font-size: 18px;
+}
+
+/* ================= BUTTONS ================= */
+.btn-animate {
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover,
+.btn-danger:hover,
+.btn-outline-light:hover {
+    transform: scale(1.05);
+}
+
+.btn-outline-light:hover {
+    background-color: white;
+    color: #0d6efd !important;
+}
+
+/* ================= CARDS ================= */
+.custom-card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+    .custom-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+/* ================= ICON BOX ================= */
+.icon-box {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 28px;
+}
+
+@media (max-width: 768px) {
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+}
+
+/* ================= SIGNUP PAGE ================= */
+.signup-page {
+    height: 90vh;
+}
+
+.signup-card {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= SIGNIN PAGE ================= */
+/* ===== Background ===== */
+/* Page */
+.signin-page {
+    height: 90vh;
+}
+
+/* Card */
+.signin-card {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Inputs */
+.input-style {
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+/* Left Icon */
+.input-icon {
+    position: absolute;
+    top: 38px;
+    left: 12px;
+    color: #6c757d;
+}
+
+/* Right Eye Icon */
+.toggle-password {
+    position: absolute;
+    top: 38px;
+    right: 12px;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+    /* Hover effect */
+    .toggle-password:hover {
+        color: #0d6efd;
+    }
+
+/* Buttons */
+.btn-animate {
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+    .btn-animate:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+    }
+/* ===== Inputs ===== */
+.input-style {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+    .input-style:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 5px rgba(13,110,253,0.3);
+    }
+
+/* ===== Buttons ===== */
+.btn-animate {
+    transition: all 0.3s ease;
+}
+
+    .btn-animate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+/* ================= INPUT STYLE ================= */
+.input-style {
+    border-radius: 10px;
+    padding: 12px;
+    transition: 0.3s;
+}
+
+    .input-style:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 10px rgba(13,110,253,0.3);
+    }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 576px) {
+    .signup-card,
+    .signin-card {
+        padding: 20px;
+    }
+}
